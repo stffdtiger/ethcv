@@ -120,7 +120,7 @@ function StepOneHelix() {
       "Authorization": "Bearer " + g_token
     },
     success: function(data) {
-      g_dataUserTwitch = data.data[0].id;
+      g_dataUserTwitch = data;
       g_hasUserDataTwitch = true;
     },
     complete: function(status) {
@@ -157,7 +157,7 @@ function StepTwoHelix(init, destroy) {
   document.getElementById("loading-helix").classList.add("showblock");
   $.ajax({
     type: "GET",
-    url: "https://api.twitch.tv/helix/users/follows?from_id=" + g_dataUserTwitch + "&first=100&after=" + g_pageHelix,
+    url: "https://api.twitch.tv/helix/users/follows?from_id=" + g_dataUserTwitch.data[0].id + "&first=100&after=" + g_pageHelix,
     headers: {
       "Client-ID": "k8nkd1h57i2l2a3mp4g46iwm2z15tg",
       "Authorization": "Bearer " + g_token
