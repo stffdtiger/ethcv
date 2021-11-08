@@ -101,7 +101,7 @@ function LoadUser(userName) {
 
 function LoadChannel(channelName) {
   if (channelName == "") {
-    document.getElementById("current-channel").innerHTML = "No Channel Loaded";
+    document.getElementById("current-channel").innerHTML = "Channel";
     document.getElementById("frame-player").setAttribute("src", "about:blank");
     document.getElementById("frame-chat").setAttribute("src", "about:blank");
   } else {
