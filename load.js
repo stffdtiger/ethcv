@@ -3,21 +3,17 @@ var g_token, g_userName, g_hasCountTwitch, g_countHelix, g_pageHelix,
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasUserDataTwitch = false;
-var playerHeight = setInterval(setPlayerHeight, 1000);
+var g_playerHeight = setInterval(setPlayerHeight, 1000);
 
 function AddListeners() {
-  var input = document.getElementById("input-user");
-  input.addEventListener("keyup", function(event) {
+  document.getElementById("input-user").addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
-      event.preventDefault();
       LoadUser(document.getElementById("input-user").value);
       ToggleDisplay("user-dropdown");
     }
   });
-  input = document.getElementById("input-channel");
-  input.addEventListener("keyup", function(event) {
+  document.getElementById("input-channel").addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
-      event.preventDefault();
       LoadChannel(document.getElementById("input-channel").value);
       ToggleDisplay("channel-dropdown");
     }
@@ -29,7 +25,7 @@ function ToggleDisplay(section) {
   if (element.classList.contains("showblock")) {
     element.classList.remove("showblock");
   } else {
-    var elements = document.getElementsByClassName("dropdown-content showblock");
+    let elements = document.getElementsByClassName("dropdown-content showblock");
     while (elements[0]) {
       elements[0].classList.remove("showblock");
       elements = document.getElementsByClassName("dropdown-content showblock");
@@ -70,7 +66,7 @@ function GetToken(readCookie) {
     if (g_hasToken === false) {
       return GetToken(true);
     }
-  } else if (!document.location.hash || readCookie === true) {
+  } else if (readCookie === true) {
     var cookieVar = "token=";
     var decodedCookie = decodeURIComponent(document.cookie);
     cookieArray = decodedCookie.split(';');
@@ -123,12 +119,12 @@ function StepOneHelix() {
       "Client-ID": "k8nkd1h57i2l2a3mp4g46iwm2z15tg",
       "Authorization": "Bearer " + g_token
     },
-    success: function(data, status, jqxhr) {
-      g_dataUserTwitch = data;
+    success: function(data) {
+      g_dataUserTwitch = data.data[0].id;
       g_hasUserDataTwitch = true;
     },
-    complete: function(jqxhr, status) {
-      if (!g_dataUserTwitch.data[0]) {
+    complete: function(status) {
+      if (!g_dataUserTwitch) {
         document.getElementById("invalid-username-helix").classList.add("showblock");
         g_hasUserDataTwitch = false;
       } else if (status == "success") {
@@ -161,12 +157,12 @@ function StepTwoHelix(init, destroy) {
   document.getElementById("loading-helix").classList.add("showblock");
   $.ajax({
     type: "GET",
-    url: "https://api.twitch.tv/helix/users/follows?from_id=" + g_dataUserTwitch.data[0].id + "&first=100&after=" + g_pageHelix,
+    url: "https://api.twitch.tv/helix/users/follows?from_id=" + g_dataUserTwitch + "&first=100&after=" + g_pageHelix,
     headers: {
       "Client-ID": "k8nkd1h57i2l2a3mp4g46iwm2z15tg",
       "Authorization": "Bearer " + g_token
     },
-    success: function(data, status, jqxhr) {
+    success: function(data) {
       g_dataFollowsTwitch = data;
       if (!g_hasCountTwitch) {
         g_countHelix = parseInt(data.total);
@@ -188,7 +184,7 @@ function StepTwoHelix(init, destroy) {
       }
 
     },
-    complete: function(jqxhr, status) {
+    complete: function(status) {
       if (status == "success") {
         return StepThreeHelix();
       } else {
@@ -207,7 +203,7 @@ function StepThreeHelix() {
       "Client-ID": "k8nkd1h57i2l2a3mp4g46iwm2z15tg",
       "Authorization": "Bearer " + g_token
     },
-    success: function(data, status, jqxhr) {
+    success: function(data) {
       var spanT;
       var isLiveTwitch;
       for (let ii = 0 ; ii < parseInt(g_dataFollowsTwitch.data.length) ; ii++) {
@@ -240,7 +236,7 @@ function StepThreeHelix() {
         }
       }
     },
-    complete: function(jqxhr, status) {
+    complete: function(status) {
       if (status == "success") {
         if (g_countHelix > 0) {
           return StepTwoHelix(false, false);
