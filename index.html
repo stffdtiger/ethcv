@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
     <title>Ethereal Channel Viewer</title>
-    <script src="jquery-3.3.1.min.js"></script>
-    <script src="load.js"></script>
-
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
     <style>
 html,body { margin: 0; width: 100vw; height: 100vh }
 body      { background-color: #262626; color: #F1F1F1; font-family: Helvetica, Arial, sans-serif }
@@ -130,7 +128,6 @@ button {
 .hide            { display: none }
 .showblock       { display: block }
     </style>
-
   </head>
   <body onload="AddListeners();GetToken(true);">
     <div id="page">
