@@ -47,24 +47,17 @@ function CookieExp() {
 }
 
 function GetToken(readHash, readCookie) {
-  var hashVar = "access_token=";
-  if (document.location.hash && readHash === true) {
+  var hashCheck = document.location.hash;
+  if (readHash === true && hashCheck) {
+    var hashVar = "access_token=";
     var hashArray = document.location.hash.split("&");
-    for (let ii = 0 ; ii < hashArray.length ; ii++) {
-      var hashTest = hashArray[ii];
-      while (hashTest.charAt(0) == '#') {
-        hashTest = hashTest.substring(1);
-      }
-      if (hashTest.indexOf(hashVar) === 0) {
-        g_token = hashTest.substring(hashVar.length, hashTest.length);
-        g_hasToken = true;
-        document.cookie = "token=" + g_token + CookieExp();
-        break;
-      }
-    }
-    if (g_hasToken === false) {
-      return GetToken(false, true);
-    }
+    var hashTest = hashArray[0];
+    do {
+      hashTest = hashTest.substring(1);
+    } while (hashTest.indexOf(hashVar) !== 0);
+    g_token = hashTest.substring(hashVar.length, hashTest.length);
+    g_hasToken = true;
+    document.cookie = "token=" + g_token + CookieExp();
   } else if (readCookie === true) {
     var cookieVar = "token=";
     var decodedCookie = decodeURIComponent(document.cookie);
