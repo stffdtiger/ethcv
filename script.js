@@ -46,13 +46,13 @@ function CookieExp() {
   return expires;
 }
 
-function GetToken(readCookie) {
+function GetToken(readHash, readCookie) {
   var hashVar = "access_token=";
-  if (document.location.hash && readCookie == undefined) {
+  if (document.location.hash && readHash === true) {
     var hashArray = document.location.hash.split("&");
     for (let ii = 0 ; ii < hashArray.length ; ii++) {
       var hashTest = hashArray[ii];
-      while (hashTest.charAt(0) == '#') {
+      while (hashTest.charAt(0) === '#') {
         hashTest = hashTest.substring(1);
       }
       if (hashTest.indexOf(hashVar) === 0) {
@@ -63,7 +63,7 @@ function GetToken(readCookie) {
       }
     }
     if (g_hasToken === false) {
-      return GetToken(true);
+      return GetToken(false, true);
     }
   } else if (readCookie === true) {
     var cookieVar = "token=";
@@ -71,7 +71,7 @@ function GetToken(readCookie) {
     cookieArray = decodedCookie.split(';');
     for (let ii = 0 ; ii < cookieArray.length ; ii++) {
       var cookieTest = cookieArray[ii];
-      while (cookieTest.charAt(0) == ' ') {
+      while (cookieTest.charAt(0) === ' ') {
         cookieTest = cookieTest.substring(1);
       }
       if (cookieTest.indexOf(cookieVar) === 0) {
@@ -94,12 +94,12 @@ function LoadUser(userName) {
   } else if (g_hasToken === false) {
     alert("You need to authenticate to use the follow list feature.");
   } else {
-    document.getElementById("current-user").innerHTML = "No User Loaded";
+    document.getElementById("current-user").innerHTML = "User";
   }
 }
 
 function LoadChannel(channelName) {
-  if (channelName == "") {
+  if (channelName === "") {
     document.getElementById("current-channel").innerHTML = "Channel";
     document.getElementById("frame-player").setAttribute("src", "about:blank");
     document.getElementById("frame-chat").setAttribute("src", "about:blank");
@@ -126,7 +126,7 @@ function StepOneHelix() {
       if (!g_dataUserTwitch) {
         document.getElementById("invalid-username-helix").classList.add("showblock");
         g_hasUserDataTwitch = false;
-      } else if (status == "success") {
+      } else if (status === "success") {
         document.getElementById("invalid-username-helix").classList.remove("showblock");
         return StepTwoHelix(true, false);
       }
@@ -184,7 +184,7 @@ function StepTwoHelix(init, destroy) {
 
     },
     complete: function(jqxhr, status) {
-      if (status == "success") {
+      if (status === "success") {
         return StepThreeHelix();
       } else {
         document.getElementById("loading-helix").classList.remove("showblock");
@@ -236,7 +236,7 @@ function StepThreeHelix() {
       }
     },
     complete: function(jqxhr, status) {
-      if (status == "success") {
+      if (status === "success") {
         if (g_countHelix > 0) {
           return StepTwoHelix(false, false);
         } else {
