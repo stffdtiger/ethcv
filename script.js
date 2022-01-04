@@ -46,9 +46,9 @@ function CookieExp() {
   return expires;
 }
 
-function GetToken(readHash) {
+function GetToken() {
   var hashCheck = document.location.hash;
-  if (readHash === true && hashCheck) {
+  if (hashCheck) {
     var hashVar = "access_token=";
     var hashArray = document.location.hash.split("&");
     var hashTest = hashArray[0];
@@ -61,7 +61,7 @@ function GetToken(readHash) {
   } else {
     var cookieVar = "token=";
     var decodedCookie = decodeURIComponent(document.cookie);
-    cookieArray = decodedCookie.split(';');
+    var cookieArray = decodedCookie.split(';');
     for (let ii = 0 ; ii < cookieArray.length ; ii++) {
       var cookieTest = cookieArray[ii];
       while (cookieTest.charAt(0) === ' ') {
