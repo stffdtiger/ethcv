@@ -46,7 +46,7 @@ function CookieExp() {
   return expires;
 }
 
-function GetToken(readHash, readCookie) {
+function GetToken(readHash) {
   var hashCheck = document.location.hash;
   if (readHash === true && hashCheck) {
     var hashVar = "access_token=";
@@ -58,7 +58,7 @@ function GetToken(readHash, readCookie) {
     g_token = hashTest.substring(hashVar.length, hashTest.length);
     g_hasToken = true;
     document.cookie = "token=" + g_token + CookieExp();
-  } else if (readCookie === true) {
+  } else {
     var cookieVar = "token=";
     var decodedCookie = decodeURIComponent(document.cookie);
     cookieArray = decodedCookie.split(';');
