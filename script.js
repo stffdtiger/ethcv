@@ -52,7 +52,7 @@ function GetToken(readHash, readCookie) {
     var hashArray = document.location.hash.split("&");
     for (let ii = 0 ; ii < hashArray.length ; ii++) {
       var hashTest = hashArray[ii];
-      while (hashTest.charAt(0) === '#') {
+      while (hashTest.charAt(0) == '#') {
         hashTest = hashTest.substring(1);
       }
       if (hashTest.indexOf(hashVar) === 0) {
