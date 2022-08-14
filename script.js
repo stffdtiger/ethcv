@@ -1,7 +1,7 @@
-var g_token, g_userName, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitch, g_urlStreamsTwitch, g_dataUserTwitch, g_dataFollowsTwitch;
+var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitch, g_urlStreamsTwitch, g_dataUserTwitch, g_dataFollowsTwitch;
 var g_overlayIndex = 0;
 var g_hasToken = false;
-var g_hasUserDataTwitch = false;
+var g_hasDataUserTwitch = false;
 var g_playerHeight = setInterval(setPlayerHeight, 1000);
 
 function AddListeners() {
@@ -82,8 +82,7 @@ function LoadUser(userName) {
   if (oldTable) oldTable.parentNode.removeChild(oldTable);
   if (g_hasToken === true && userName !== "") {
     document.getElementById("current-user").innerHTML = userName;
-    g_userName = userName;
-    return StepOneHelix();
+    return StepOneHelix(userName);
   } else if (g_hasToken === false) {
     alert("You need to authenticate to use the follow list feature.");
   } else {
@@ -103,25 +102,29 @@ function LoadChannel(channelName) {
   }
 }
 
-function StepOneHelix() {
+function StepOneHelix(userName) {
   $.ajax({
     type: "GET",
-    url: "https://api.twitch.tv/helix/users?login=" + g_userName,
+    url: "https://api.twitch.tv/helix/users?login=" + userName,
     headers: {
       "Client-ID": "k8nkd1h57i2l2a3mp4g46iwm2z15tg",
       "Authorization": "Bearer " + g_token
     },
     success: function(data) {
+      //console.log(data);
       g_dataUserTwitch = data.data[0].id;
-      g_hasUserDataTwitch = true;
+      g_hasDataUserTwitch = true;
     },
     complete: function(jqxhr, status) {
-      if (!g_dataUserTwitch) {
+      if (status === "success" && !g_dataUserTwitch) {
         document.getElementById("invalid-username-helix").classList.add("showblock");
-        g_hasUserDataTwitch = false;
+        g_hasDataUserTwitch = false;
       } else if (status === "success") {
         document.getElementById("invalid-username-helix").classList.remove("showblock");
         return StepTwoHelix(true, false);
+      } else {
+        document.getElementById("invalid-username-helix").classList.add("showblock");
+        g_hasDataUserTwitch = false;
       }
     }
   });
@@ -155,6 +158,7 @@ function StepTwoHelix(init, destroy) {
       "Authorization": "Bearer " + g_token
     },
     success: function(data) {
+      console.log(data);
       g_dataFollowsTwitch = data;
       if (!g_hasCountTwitch) {
         g_countHelix = parseInt(data.total);
@@ -196,6 +200,7 @@ function StepThreeHelix() {
       "Authorization": "Bearer " + g_token
     },
     success: function(data) {
+      //console.log(data);
       var spanT;
       var isLiveTwitch;
       for (let ii = 0 ; ii < parseInt(g_dataFollowsTwitch.data.length) ; ii++) {
@@ -245,5 +250,5 @@ function StepThreeHelix() {
 }
 
 function UpdateFollowListHelix() {
-  if (g_hasUserDataTwitch) return StepTwoHelix(true, true);
+  if (g_hasDataUserTwitch) return StepTwoHelix(true, true);
 }
