@@ -158,7 +158,7 @@ function StepTwoHelix(init, destroy) {
       "Authorization": "Bearer " + g_token
     },
     success: function(data) {
-      console.log(data);
+      //console.log(data);
       g_dataFollowsTwitch = data;
       if (!g_hasCountTwitch) {
         g_countHelix = parseInt(data.total);
@@ -207,7 +207,7 @@ function StepThreeHelix() {
         isLiveTwitch = false;
         spanT = document.createElement("span");
         spanT.classList.add("spanlink");
-        spanT.index = g_dataFollowsTwitch.data[ii].to_name;
+        spanT.index = g_dataFollowsTwitch.data[ii].to_login;
         for (let jj = 0 ; jj < parseInt(data.data.length) ; jj++) {
           if (data.data[jj].user_name === g_dataFollowsTwitch.data[ii].to_name && data.data[jj].type === "live") {
             spanT.classList.add("live");
