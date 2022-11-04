@@ -1,0 +1,122 @@
+html,body { margin: 0; width: 100vw; height: 100vh }
+body      { background-color: #262626; color: #F1F1F1; font-family: Helvetica, Arial, sans-serif }
+input     { outline: none }
+iframe    { border: none }
+
+button {
+  display: block;
+  width: 150px;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #F1F1F1;
+  cursor: pointer;
+  outline: none;
+  border-radius: 10px;
+  color: #F1F1F1;
+  background-color: #1F1F1F;
+}
+
+#page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+#header  {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #262626
+}
+
+#content {
+  width: 100%;
+  height: calc(100% - 50px);
+  display: flex;
+  justify-content: center
+}
+
+#header-left   {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  min-width: 250px
+}
+
+#header-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto
+}
+
+#header-right  {
+  width: 340px;
+  min-width: 340px
+}
+
+#content-left   {
+  width: 250px;
+  min-width: 250px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #161616;
+  z-index: 3
+}
+
+#content-middle {
+  flex: 1 1 auto;
+  background-color: #060606;
+  z-index: 1
+}
+
+#content-right  {
+  width: 340px;
+  min-width: 340px;
+  overflow: hidden;
+  background-color: #161616;
+  z-index: 4
+}
+
+#content-left::-webkit-scrollbar { display: none }
+#content-left { -ms-overflow-style: none; scrollbar-width: none }
+
+#follow-table {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.dropdown-content {
+  position: absolute;
+  text-align: center;
+  z-index: 2
+}
+
+.dropdown-content span {
+  display: block;
+  width: 150px;
+  min-width: 150px;
+  padding: 5px 0px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: #1F1F1F;
+}
+
+.dropdown-content span input { width: 130px }
+
+.spanlink        { cursor: pointer }
+.title           { font-weight: bold }
+.marginbottomtop { margin: 10px 0 10px 0 }
+.marginbottom    { margin: 0 0 10px 0 }
+.live            { color: lightgreen }
+.hide            { display: none }
+.showblock       { display: block }
