@@ -97,8 +97,8 @@ function LoadChannel(channelName) {
     document.getElementById("frame-chat").setAttribute("src", "about:blank");
   } else {
     document.getElementById("current-channel").innerHTML = channelName;
-    document.getElementById("frame-player").setAttribute("src", "https://player.twitch.tv/?channel="+channelName+"&parent=stffdtiger.github.io&muted=false");
-    document.getElementById("frame-chat").setAttribute("src", "https://www.twitch.tv/embed/"+channelName+"/chat?parent=stffdtiger.github.io&darkpopout");
+    document.getElementById("frame-player").setAttribute("src", "https://player.twitch.tv/?channel="+channelName+"&parent=stffdtiger.github.io/ethcv/");
+    document.getElementById("frame-chat").setAttribute("src", "https://www.twitch.tv/embed/"+channelName+"/chat?parent=stffdtiger.github.io/ethcv/&darkpopout");
   }
 }
 
