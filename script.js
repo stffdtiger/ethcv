@@ -2,7 +2,10 @@ var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitc
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasDataUserTwitch = false;
-var g_playerHeight = setInterval(setPlayerHeight, 1000);
+var g_currentChannel = "";
+var g_playerOptions = { width: 16, height: 9, channel: g_currentChannel, parent: "stffdtiger.github.io" };
+var g_player = new Twitch.Player("twitch-embed", g_playerOptions);
+var g_playerHeight = setInterval(setPlayerDimensions, 1000);
 
 function AddListeners() {
   document.getElementById("input-user").addEventListener("keyup", function(event) {
@@ -33,10 +36,11 @@ function ToggleDisplay(section) {
   }
 }
 
-function setPlayerHeight() {
-  var curWidth = parseInt(document.getElementById("frame-player").offsetWidth);
-  var newHeight = Math.floor(curWidth / 16 * 9);
-  document.getElementById("frame-player").setAttribute("height", newHeight);
+function setPlayerDimensions() {
+  var newWidth = parseInt(document.getElementById("page").offsetWidth) - 590; // 590 is left side (250) + right side (340)
+  var newHeight = Math.floor(newWidth / 16 * 9);
+  g_playerOptions = { width: newWidth, height: newHeight, channel: g_currentChannel, parent: "stffdtiger.github.io" };
+  g_player = new Twitch.Player("twitch-embed", g_playerOptions);
 }
 
 function CookieExp() {
@@ -93,13 +97,11 @@ function LoadUser(userName) {
 function LoadChannel(channelName) {
   if (channelName === "") {
     document.getElementById("current-channel").innerHTML = "Channel";
-    document.getElementById("frame-player").setAttribute("src", "about:blank");
-    document.getElementById("frame-chat").setAttribute("src", "about:blank");
   } else {
     document.getElementById("current-channel").innerHTML = channelName;
-    document.getElementById("frame-player").setAttribute("src", "https://player.twitch.tv/?channel="+channelName+"&parent=stffdtiger.github.io");
-    document.getElementById("frame-chat").setAttribute("src", "https://www.twitch.tv/embed/"+channelName+"/chat?parent=stffdtiger.github.io&darkpopout");
   }
+
+  player.setChannel(channelName);
 }
 
 function StepOneHelix(userName) {
