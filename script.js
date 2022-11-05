@@ -5,7 +5,7 @@ var g_hasDataUserTwitch = false;
 var g_currentChannel = "";
 var g_playerOptions = { width: 16, height: 9, channel: g_currentChannel, parent: "stffdtiger.github.io" };
 var g_player = new Twitch.Player("twitch-embed", g_playerOptions);
-var g_playerHeight = setInterval(setPlayerDimensions, 1000);
+var g_playerDimensions = setInterval(setPlayerDimensions, 1000);
 
 function AddListeners() {
   document.getElementById("input-user").addEventListener("keyup", function(event) {
@@ -39,8 +39,8 @@ function ToggleDisplay(section) {
 function setPlayerDimensions() {
   var newWidth = parseInt(document.getElementById("page").offsetWidth) - 590; // 590 is left side (250) + right side (340)
   var newHeight = Math.floor(newWidth / 16 * 9);
-  g_playerOptions = { width: newWidth, height: newHeight, channel: g_currentChannel, parent: "stffdtiger.github.io" };
-  g_player = new Twitch.Player("twitch-embed", g_playerOptions);
+  g_player.setWidth(newWidth);
+  g_player.setHeight(newHeight);
 }
 
 function CookieExp() {
@@ -102,6 +102,7 @@ function LoadChannel(channelName) {
   }
 
   g_player.setChannel(channelName);
+  g_currentChannel = channelName;
 }
 
 function StepOneHelix(userName) {
