@@ -1,6 +1,7 @@
 html,body { margin: 0; width: 100vw; height: 100vh }
 body      { background-color: #262626; color: #F1F1F1; font-family: Helvetica, Arial, sans-serif }
 input     { outline: none }
+iframe    { border: none }
 
 button {
   display: block;

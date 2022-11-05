@@ -1,17 +1,8 @@
-var g_token,
-    g_hasCountTwitch,
-    g_countHelix,
-    g_pageHelix,
-    g_hasFirstInTableTwitch,
-    g_urlStreamsTwitch,
-    g_dataUserTwitch,
-    g_dataFollowsTwitch,
-    g_player;
+var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitch, g_urlStreamsTwitch, g_dataUserTwitch, g_dataFollowsTwitch;
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasDataUserTwitch = false;
-var g_playerOptions = { width: 1280, height: 720, channel: "stuffedtiger", parent: "stffdtiger.github.io" };
-var g_playerDimensions = setInterval(setPlayerDimensions, 1000);
+var g_playerHeight = setInterval(setPlayerHeight, 1000);
 
 function AddListeners() {
   document.getElementById("input-user").addEventListener("keyup", function(event) {
@@ -28,11 +19,6 @@ function AddListeners() {
   });
 }
 
-function SetUpPlayer() {
-  g_player = new Twitch.Player("twitch-embed", g_playerOptions);
-  document.getElementById("twitch-player").classList.add("hide");
-}
-
 function ToggleDisplay(section) {
   var element = document.getElementById(section);
   if (element.classList.contains("showblock")) {
@@ -47,11 +33,10 @@ function ToggleDisplay(section) {
   }
 }
 
-function setPlayerDimensions() {
-  var newWidth = parseInt(document.getElementById("page").offsetWidth) - 590; // 590 is left side (250) + right side (340)
-  var newHeight = Math.floor(newWidth / 16 * 9);
-  g_player.setWidth(newWidth);
-  g_player.setHeight(newHeight);
+function setPlayerHeight() {
+  var curWidth = parseInt(document.getElementById("frame-player").offsetWidth);
+  var newHeight = Math.floor(curWidth / 16 * 9);
+  document.getElementById("frame-player").setAttribute("height", newHeight);
 }
 
 function CookieExp() {
@@ -108,14 +93,12 @@ function LoadUser(userName) {
 function LoadChannel(channelName) {
   if (channelName === "") {
     document.getElementById("current-channel").innerHTML = "Channel";
-    document.getElementById("twitch-embed").classList.add("hide");
+    document.getElementById("frame-player").setAttribute("src", "about:blank");
+    document.getElementById("frame-chat").setAttribute("src", "about:blank");
   } else {
     document.getElementById("current-channel").innerHTML = channelName;
-    if (document.getElementById("twitch-embed").classList.contains("hide")) {
-      document.getElementById("twitch-embed").classList.remove("hide");
-    }
-    g_player.setChannel(channelName);
-    g_currentChannel = channelName;
+    document.getElementById("frame-player").setAttribute("src", "https://player.twitch.tv/?channel="+channelName+"&parent=stffdtiger.github.io");
+    document.getElementById("frame-chat").setAttribute("src", "https://www.twitch.tv/embed/"+channelName+"/chat?parent=stffdtiger.github.io&darkpopout");
   }
 }
 
