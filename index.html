@@ -4,6 +4,7 @@
     <title>Ethereal Channel Viewer</title>
     <script src="jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body onload="AddListeners();GetToken();">
@@ -50,11 +51,17 @@
         </div>
   <!-- CONTENT MIDDLE -->
         <div id="content-middle">
-          <iframe id="frame-player" src="about:blank" width="100%" height="9" allowfullscreen="true"></iframe>
+          <div id="twitch-embed"></div>
+            <script type="text/javascript">
+              new Twitch.Player("twitch-embed", {
+                channel: "stuffedtiger",
+                parent: "stffdtiger.github.io"
+              });
+            </script>
         </div>
   <!-- CONTENT RIGHT -->
         <div id="content-right">
-          <iframe id="frame-chat" src="about:blank" width="100%" height="100%"></iframe>
+          
         </div>
       </div>
     </div>
