@@ -1,10 +1,16 @@
-var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitch, g_urlStreamsTwitch, g_dataUserTwitch, g_dataFollowsTwitch;
+var g_token,
+    g_hasCountTwitch,
+    g_countHelix,
+    g_pageHelix,
+    g_hasFirstInTableTwitch,
+    g_urlStreamsTwitch,
+    g_dataUserTwitch,
+    g_dataFollowsTwitch,
+    g_player;
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasDataUserTwitch = false;
-var g_currentChannel = "stuffedtiger";
-var g_playerOptions = { width: 1280, height: 720, channel: g_currentChannel, parent: "stffdtiger.github.io" };
-var g_player = new Twitch.Player("twitch-embed", g_playerOptions);
+var g_playerOptions = { width: 1280, height: 720, channel: "stuffedtiger", parent: "stffdtiger.github.io" };
 var g_playerDimensions = setInterval(setPlayerDimensions, 1000);
 
 function AddListeners() {
@@ -20,6 +26,11 @@ function AddListeners() {
       ToggleDisplay("channel-dropdown");
     }
   });
+}
+
+function SetUpPlayer() {
+  g_player = new Twitch.Player("twitch-embed", g_playerOptions);
+  document.getElementById("twitch-player").classList.add("hide");
 }
 
 function ToggleDisplay(section) {
