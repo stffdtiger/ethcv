@@ -2,8 +2,8 @@ var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitc
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasDataUserTwitch = false;
-var g_currentChannel = "";
-var g_playerOptions = { width: 16, height: 9, channel: g_currentChannel, parent: "stffdtiger.github.io" };
+var g_currentChannel = "stuffedtiger";
+var g_playerOptions = { width: 1280, height: 720, channel: g_currentChannel, parent: "stffdtiger.github.io" };
 var g_player = new Twitch.Player("twitch-embed", g_playerOptions);
 var g_playerDimensions = setInterval(setPlayerDimensions, 1000);
 
@@ -97,12 +97,15 @@ function LoadUser(userName) {
 function LoadChannel(channelName) {
   if (channelName === "") {
     document.getElementById("current-channel").innerHTML = "Channel";
+    document.getElementById("twitch-embed").classList.add("hide");
   } else {
     document.getElementById("current-channel").innerHTML = channelName;
+    if (document.getElementById("twitch-embed").classList.contains("hide")) {
+      document.getElementById("twitch-embed").classList.remove("hide");
+    }
+    g_player.setChannel(channelName);
+    g_currentChannel = channelName;
   }
-
-  g_player.setChannel(channelName);
-  g_currentChannel = channelName;
 }
 
 function StepOneHelix(userName) {
