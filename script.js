@@ -101,7 +101,7 @@ function LoadChannel(channelName) {
     document.getElementById("current-channel").innerHTML = channelName;
   }
 
-  player.setChannel(channelName);
+  g_player.setChannel(channelName);
 }
 
 function StepOneHelix(userName) {
