@@ -1,4 +1,11 @@
-var g_token, g_hasCountTwitch, g_countHelix, g_pageHelix, g_hasFirstInTableTwitch, g_urlStreamsTwitch, g_dataUserTwitch, g_dataFollowsTwitch;
+var g_token,
+    g_hasCountTwitch,
+    g_countHelix,
+    g_pageHelix,
+    g_hasFirstInTableTwitch,
+    g_urlStreamsTwitch,
+    g_dataUserTwitch,
+    g_dataFollowsTwitch;
 var g_overlayIndex = 0;
 var g_hasToken = false;
 var g_hasDataUserTwitch = false;

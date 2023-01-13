@@ -7,55 +7,57 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body onload="AddListeners();GetToken();">
-    <div id="page">
-      <div id="header">
-        <div id="header-left">
-          <span class="header-left-item">&#8595; (this frame scrolls) &#8595;</span>
-        </div>
-        <div id="header-middle">
-          <div class="header-middle-item">
-            <button class="header-middle-button" id="current-user" onclick="ToggleDisplay('user-dropdown');">User</button>
-            <div class="dropdown-content hide" id="user-dropdown">
-              <span><input id="input-user" type="text" placeholder="Press enter to load"></span>
-            </div>
-          </div>
-          <div class="header-middle-item">
-            <button class="header-middle-button" id="current-channel" onclick="ToggleDisplay('channel-dropdown');">Channel</button>
-            <div class="dropdown-content hide" id="channel-dropdown">
-              <span><input id="input-channel" type="text" placeholder="Press enter to load"></span>
-            </div>
-          </div>
-          <div class="header-middle-item">
-            <button class="header-middle-button" id="button-authenticate" onclick="window.location.href='https://id.twitch.tv/oauth2/authorize?client_id=k8nkd1h57i2l2a3mp4g46iwm2z15tg&redirect_uri=https://stffdtiger.github.io/ethcv/&response_type=token&scope='">Authenticate</button>
-          </div>
-          <div class="header-middle-item">
-            <button class="header-middle-button" id="button-contact" onclick="ToggleDisplay('contact-dropdown');">Contact</button>
-            <div class="dropdown-content hide" id="contact-dropdown">
-              <span>Discord: stuffedtiger#9803</span>
-              <span>Twitter: @stffdtiger</span>
-            </div>
-          </div>
-        </div>
-        <div id="header-right"></div>
+    <!-- HEADER -->
+    <div id="header">
+      <!-- HEADER LEFT -->
+      <div id="header-left">
+        <span class="header-left-item">&#8595; (this frame scrolls) &#8595;</span>
       </div>
-  <!-- CONTENT -->
-      <div id="content">
-  <!-- CONTENT LEFT -->
-        <div id="content-left">
-          <span class="spanlink title marginbottomtop" title="click to unload the current channel" onclick="LoadChannel('');">Unload Channel</span>
-          <span class="spanlink title marginbottom" title="click to update the follow list" onclick="UpdateFollowListHelix();">[following]</span>
-          <p class="hide" id="invalid-username-helix"><span class="title">INVALID USERNAME</span></p>
-          <p class="hide" id="loading-helix"><span class="title">LOADING...</span></p>
-          <div class="hide" id="follows-helix"></div>
+      <!-- HEADER MIDDLE -->
+      <div id="header-middle">
+        <div class="header-middle-item">
+          <button class="header-middle-button" id="current-user" onclick="ToggleDisplay('user-dropdown');">User</button>
+          <div class="dropdown-content hide" id="user-dropdown">
+            <span><input id="input-user" type="text" placeholder="Press enter to load"></span>
+          </div>
         </div>
-  <!-- CONTENT MIDDLE -->
-        <div id="content-middle">
-          <iframe id="frame-player" src="about:blank" width="100%" height="9" allowfullscreen="true"></iframe>
+        <div class="header-middle-item">
+          <button class="header-middle-button" id="current-channel" onclick="ToggleDisplay('channel-dropdown');">Channel</button>
+          <div class="dropdown-content hide" id="channel-dropdown">
+            <span><input id="input-channel" type="text" placeholder="Press enter to load"></span>
+          </div>
         </div>
-  <!-- CONTENT RIGHT -->
-        <div id="content-right">
-          <iframe id="frame-chat" src="about:blank" width="100%" height="100%"></iframe>
+        <div class="header-middle-item">
+          <button class="header-middle-button" id="button-authenticate" onclick="window.location.href='https://id.twitch.tv/oauth2/authorize?client_id=k8nkd1h57i2l2a3mp4g46iwm2z15tg&redirect_uri=https://stffdtiger.github.io/ethcv/&response_type=token&scope='">Authenticate</button>
         </div>
+        <div class="header-middle-item">
+          <button class="header-middle-button" id="button-contact" onclick="ToggleDisplay('contact-dropdown');">Contact</button>
+          <div class="dropdown-content hide" id="contact-dropdown">
+            <span>Discord: stuffedtiger#9803</span>
+            <span>Twitter: @stffdtiger</span>
+          </div>
+        </div>
+      </div>
+      <!-- HEADER RIGHT -->
+      <div id="header-right"></div>
+    </div>
+    <!-- CONTENT -->
+    <div id="content">
+      <!-- CONTENT LEFT -->
+      <div id="content-left">
+        <span class="spanlink title marginbottomtop" title="click to unload the current channel" onclick="LoadChannel('');">Unload Channel</span>
+        <span class="spanlink title marginbottom" title="click to update the follow list" onclick="UpdateFollowListHelix();">[following]</span>
+        <p class="hide" id="invalid-username-helix"><span class="title">INVALID USERNAME</span></p>
+        <p class="hide" id="loading-helix"><span class="title">LOADING...</span></p>
+        <div class="hide" id="follows-helix"></div>
+      </div>
+      <!-- CONTENT MIDDLE -->
+      <div id="content-middle">
+        <iframe id="frame-player" src="about:blank" width="100%" height="9" allowfullscreen="true"></iframe>
+      </div>
+      <!-- CONTENT RIGHT -->
+      <div id="content-right">
+        <iframe id="frame-chat" src="about:blank" width="100%" height="100%"></iframe>
       </div>
     </div>
   </body>
