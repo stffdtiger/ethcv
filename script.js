@@ -56,15 +56,20 @@ function CookieExp() {
 function GetToken() {
   var hashCheck = document.location.hash;
   if (hashCheck) {
-    var hashVar = "access_token=";
     var hashArray = document.location.hash.split("&");
-    var hashTest = hashArray[0];
-    do {
-      hashTest = hashTest.substring(1);
-    } while (hashTest.indexOf(hashVar) !== 0);
-    g_token = hashTest.substring(hashVar.length, hashTest.length);
-    g_hasToken = true;
-    document.cookie = "token=" + g_token + CookieExp();
+    var accessTokenVar = "access_token=";
+    var accessTokenTest;
+    while (hashArray[0]) {
+      accessTokenTest = hashArray[0];
+      if (accessTokenTest.charAt(0) === '#') accessTokenTest = accessTokenTest.substring(1);
+      if (accessTokenTest.indexOf(accessTokenVar) === 0) {
+        g_token = accessTokenTest.substring(accessTokenVar, accessTokenTest.length);
+        g_hasToken = true;
+        document.cookie = "token=" + g_token + CookieExp();
+        break;
+      }
+      hashArray.shift();
+    }
   } else {
     var cookieVar = "token=";
     var decodedCookie = decodeURIComponent(document.cookie);
