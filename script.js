@@ -61,12 +61,9 @@ function GetToken() {
     var accessTokenTest;
     while (hashArray[0]) {
       accessTokenTest = hashArray[0];
-console.log(accessTokenTest);
       if (accessTokenTest.charAt(0) === "#") accessTokenTest = accessTokenTest.substring(1);
-console.log(accessTokenTest);
       if (accessTokenTest.indexOf(accessTokenVar) === 0) {
-        g_token = accessTokenTest.substring(accessTokenVar, accessTokenTest.length);
-console.log(g_token);
+        g_token = accessTokenTest.substring(accessTokenVar.length, accessTokenTest.length);
         g_hasToken = true;
         document.cookie = "token=" + g_token + CookieExp();
         break;
