@@ -264,3 +264,4 @@ function StepThreeHelix() {
 function UpdateFollowListHelix() {
   if (g_hasDataUserTwitch) return StepTwoHelix(true, true);
 }
+
