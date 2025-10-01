@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #262626;
+  color: #F1F1F1;
+  font-family: Helvetica, Arial, sans-serif
+}
+
+p { margin: 0 }
+
+input  { outline: none }
+iframe { border: none }
+
+button {
+  width: 150px;
+  min-width: 150px;
+  padding: 5px;
+  border: 1px solid #F1F1F1;
+  cursor: pointer;
+  outline: none;
+  border-radius: 10px;
+  color: #F1F1F1;
+  background-color: #1F1F1F
+}
+
+#page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+
+#header {
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+  background-color: #262626;
+  display: flex;
+  justify-content: space-between;
+}
+
+#header-left {
+  width: 250px
+}
+
+#header-middle {
+  width: 800px;
+  min-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+#header-right {
+  width: 340px
+}
+
+#content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden
+}
+
+#content-left {
+  width: 250px;
+  min-width: 250px;
+  height: 100%;
+  background-color: #161616;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3
+}
+
+#content-middle {
+  width: 100%;
+  height: 100%;
+  background-color: #060606;
+  z-index: 1
+}
+
+#content-right {
+  width: 340px;
+  height: 100%;
+  min-width: 340px;
+  background-color: #161616;
+  z-index: 4
+}
+
+#follow-table {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.dropdown-content {
+  position: absolute;
+  text-align: center;
+  z-index: 2
+}
+
+.dropdown-content span {
+  display: block;
+  width: 150px;
+  min-width: 150px;
+  padding: 5px 0px;
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: #1F1F1F
+}
+
+.dropdown-content span input { width: 130px }
+
+.spanlink        { cursor: pointer }
+.title           { font-weight: bold }
+.marginbottomtop { margin: 10px 0 10px 0 }
+.marginbottom    { margin: 0 0 10px 0 }
+.live            { color: lightgreen }
+
+.hide            { display: none }
+.showblock       { display: block }
+
