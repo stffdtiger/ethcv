@@ -61,7 +61,7 @@ function LoadUser(userName) {
     const url =
       "https://id.twitch.tv/oauth2/authorize" +
       "?client_id=" + clientID +
-      "&redirect_uri=" redirectURI +
+      "&redirect_uri=" + redirectURI +
       "&response_type=code" +
       "&scope=user:read:follows";
 
