@@ -49,11 +49,25 @@ function GetAuth() {
   const code = params.get("code");
   //console.log("code: ", code);
   if (code) {
-    $.post(backendURL, { code: code }, function(data) {
-      console.log(data);
+    //$.post(backendURL, { code: code }, function(data) {
+      //console.log(data);
       //return CreateFollowTable(data.data);
-      const cleanURL = window.location.origin + window.location.pathname;
-      window.history.replaceState({}, document.title, cleanURL);
+      //const cleanURL = window.location.origin + window.location.pathname;
+      //window.history.replaceState({}, document.title, cleanURL);
+    //});
+
+    $.ajax({
+      url: backendURL,
+      method: "POST",
+      data: JSON.stringify({ code: code }),
+      contentType: "application/json",
+      success: function(data) {
+        console.log("SUCCESS: ", data);
+      },
+      error: function(xhr, status, error) {
+        console.log("ERROR: ", status);
+        console.log("Response: ", xhr.responseText);
+      }
     });
   }
 }
