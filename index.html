@@ -6,7 +6,7 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body onload="AddListeners();GetToken();">
+  <body onload="AddListeners();GetAuth();">
     <div id="page">
       <div id="header">
         <div id="header-left"></div>
@@ -23,7 +23,6 @@
               <span><input id="input-channel" type="text" placeholder="Press enter to load"></span>
             </div>
           </div>
-          <button class="header-middle-button" id="button-authenticate" onclick="window.location.href='https://id.twitch.tv/oauth2/authorize?client_id=k8nkd1h57i2l2a3mp4g46iwm2z15tg&redirect_uri=https://stffdtiger.github.io/ethcv/&response_type=token&scope=user%3Aread%3Afollows'">Authenticate</button>
           <div>
             <button class="header-middle-button" id="button-contact" onclick="ToggleDisplay('contact-dropdown');">Contact</button>
             <div class="dropdown-content hide" id="contact-dropdown">
@@ -37,9 +36,8 @@
       <div id="content">
         <div id="content-left">
           <span class="spanlink title marginbottomtop" title="click to unload the current channel" onclick="LoadChannel('');">Unload Channel</span>
-          <span class="spanlink title marginbottom" title="click to update the follow list" onclick="UpdateFollowListHelix();">[following]</span>
+          <span class="spanlink title marginbottom">[following]</span>
           <p class="hide" id="invalid-username-helix"><span class="title">INVALID USERNAME</span></p>
-          <p class="hide" id="loading-helix"><span class="title">LOADING...</span></p>
           <div class="hide" id="follows-helix"></div>
         </div><!-- content-left -->
         <div id="content-middle">
