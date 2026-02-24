@@ -47,15 +47,15 @@ function CookieExp() {
 function GetAuth() {
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
-  console.log("code: ", code);
-//  if (code) {
-  //  $.post(backendURL, { code: code }, function(data) {
-    //  console.log(data);
+  //console.log("code: ", code);
+  if (code) {
+    $.post(backendURL, { code: code }, function(data) {
+      console.log(data);
       //return CreateFollowTable(data.data);
-      //const cleanURL = window.location.origin + window.location.pathname;
-      //window.history.replaceState({}, document.title, cleanURL);
- //   });
- // }
+      const cleanURL = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanURL);
+    });
+  }
 }
 
 function LoadUser(userName) {
