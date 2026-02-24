@@ -51,6 +51,8 @@ function GetAuth() {
     $.post(backendURL, { code: code }, function(data) {
       console.log(data);
       //return CreateFollowTable(data.data);
+      const cleanURL = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanURL);
     });
   }
 }
