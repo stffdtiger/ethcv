@@ -4,9 +4,9 @@ var g_countHelix,
 var g_overlayIndex = 0;
 var g_hasToken = false;
 
-const clientID = "k8nkd1h57i2l2a3mp4g46iwm2z15tg";
-const redirectURI = "https://stffdtiger.github.io/ethcv/";
-const backendURL = "https://ethcv-backend.vercel.app/api/auth";
+const CLIENT_ID = "k8nkd1h57i2l2a3mp4g46iwm2z15tg";
+const REDIRECT_URI = "https://stffdtiger.github.io/ethcv/";
+const BACKEND_URL = "https://ethcv-backend.vercel.app/api/auth";
 
 function AddListeners() {
   document.getElementById("input-user").addEventListener("keyup", function(event) {
@@ -49,15 +49,15 @@ function GetAuth() {
   const code = params.get("code");
   //console.log("code: ", code);
   if (code) {
-    //$.post(backendURL, { code: code }, function(data) {
+    //$.post(BACKEND_URL, { code: code }, function(data) {
       //console.log(data);
       //return CreateFollowTable(data.data);
       //const cleanURL = window.location.origin + window.location.pathname;
-      //window.history.replaceState({}, document.title, cleanURL);
+      //window.history.replaceState(null, "", cleanURL);
     //});
 
     $.ajax({
-      url: backendURL,
+      url: BACKEND_URL,
       method: "POST",
       data: JSON.stringify({ code: code }),
       contentType: "application/json",
@@ -77,8 +77,8 @@ function LoadUser(userName) {
     document.getElementById("current-user").innerHTML = userName;
     const url =
       "https://id.twitch.tv/oauth2/authorize" +
-      "?client_id=" + clientID +
-      "&redirect_uri=" + redirectURI +
+      "?client_id=" + CLIENT_ID +
+      "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
       "&response_type=code" +
       "&scope=user:read:follows";
 
