@@ -54,8 +54,8 @@ function GetAuth() {
       //return CreateFollowTable(data.data);
       //const cleanURL = window.location.origin + window.location.pathname;
       //window.history.replaceState({}, document.title, cleanURL);
-    });
-  }
+ //   });
+ // }
 }
 
 function LoadUser(userName) {
