@@ -65,7 +65,8 @@ function LoadUser(userName) {
       "&response_type=code" +
       "&scope=user:read:follows";
 
-    window.location.href = url;
+      window.location.href = url;
+  }
 }
 
 function LoadChannel(channelName) {
